@@ -1,5 +1,6 @@
 import Head from "next/head";
-import Switch, { SwitchProps } from "@mui/material/Switch";
+import Button from "@/component/Button";
+import styles from "@/styles/main.module.scss";
 
 export default function Home() {
   return (
@@ -9,8 +10,8 @@ export default function Home() {
         <meta name="description" content="Useless button" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main>
-        <Switch />
+      <main className={styles.main}>
+        <Button />
       </main>
     </>
   );
