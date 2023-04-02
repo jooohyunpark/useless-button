@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import Switch, { SwitchProps } from "@mui/material/Switch";
-import styles from "./index.module.scss";
+import { Button } from "./styles";
 
-export default function Button() {
+export default function UselessButton() {
   const [checked, setChecked] = useState(false);
 
   const handleChange = (event) => {
@@ -23,5 +22,5 @@ export default function Button() {
     };
   }, [checked]);
 
-  return <Switch checked={checked} onChange={handleChange} />;
+  return <Button checked={checked} onChange={handleChange} disableRipple />;
 }
