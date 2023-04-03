@@ -39,6 +39,10 @@ export const Button = styled((props) => (
     "&.Mui-disabled + .MuiSwitch-track": {
       opacity: 0.7,
     },
+    "& .MuiSwitch-input": {
+      width: "500%",
+      left: "-200%",
+    },
   },
   "& .MuiSwitch-thumb": {
     boxSizing: "border-box",
