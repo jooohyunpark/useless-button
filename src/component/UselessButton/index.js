@@ -14,7 +14,7 @@ export default function UselessButton() {
     if (checked) {
       timeoutID = setTimeout(() => {
         setChecked(false);
-      }, 1000);
+      }, 700);
     }
 
     return () => {
