@@ -10,11 +10,12 @@ export default function UselessButton() {
 
   useEffect(() => {
     let timeoutID = null;
+    let time = 250 + Math.random() * 750;
 
     if (checked) {
       timeoutID = setTimeout(() => {
         setChecked(false);
-      }, 700);
+      }, time);
     }
 
     return () => {
