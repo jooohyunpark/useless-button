@@ -4,8 +4,9 @@ import {
   Cylinder,
   OrbitControls,
   OrthographicCamera,
-  BakeShadows,
   Bounds,
+  BakeShadows,
+  SoftShadows,
 } from "@react-three/drei";
 import { motion } from "framer-motion-3d";
 import { MotionConfig } from "framer-motion";
@@ -34,17 +35,28 @@ export default function UselessButton() {
 
   return (
     <Canvas shadows dpr={[1, 2]} resize={{ scroll: false, offsetSize: true }}>
-      <OrthographicCamera makeDefault position={[10, 10, 10]} />
+      <OrthographicCamera
+        makeDefault
+        position={[10, 10, 10]}
+        near={1}
+        far={100}
+      />
       <OrbitControls
         makeDefault
         maxPolarAngle={Math.PI * 0.5}
         enablePan={false}
-        enableZoom={false}
+        target={[0, 0, 0]}
+        // enableZoom={false}
       />
       <ambientLight intensity={0.3} />
-      <directionalLight position={[-1, 1, 1]} />
+      <directionalLight
+        position={[-1, 1, 1]}
+        shadow-mapSize={1024}
+        castShadow
+      />
       <axesHelper args={[100]} />
       <BakeShadows />
+      <SoftShadows />
 
       <Bounds fit clip observe margin={10}>
         <MotionConfig
@@ -68,6 +80,16 @@ export default function UselessButton() {
           </motion.group>
         </MotionConfig>
       </Bounds>
+
+      <mesh
+        scale={200}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -5, 0]}
+        receiveShadow
+      >
+        <planeGeometry />
+        <shadowMaterial transparent opacity={0.3} />
+      </mesh>
     </Canvas>
   );
 }
