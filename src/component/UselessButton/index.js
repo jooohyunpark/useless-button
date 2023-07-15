@@ -4,7 +4,8 @@ import {
   Cylinder,
   OrbitControls,
   OrthographicCamera,
-  Sphere,
+  BakeShadows,
+  Bounds,
 } from "@react-three/drei";
 import { motion } from "framer-motion-3d";
 import { MotionConfig } from "framer-motion";
@@ -34,32 +35,39 @@ export default function UselessButton() {
   return (
     <Canvas shadows dpr={[1, 2]} resize={{ scroll: false, offsetSize: true }}>
       <OrthographicCamera makeDefault position={[10, 10, 10]} />
-      <OrbitControls makeDefault maxPolarAngle={Math.PI * 0.5} />
+      <OrbitControls
+        makeDefault
+        maxPolarAngle={Math.PI * 0.5}
+        enablePan={false}
+        enableZoom={false}
+      />
       <ambientLight intensity={0.3} />
       <directionalLight position={[-1, 1, 1]} />
       <axesHelper args={[100]} />
+      <BakeShadows />
 
-      <MotionConfig
-        transition={{
-          type: "spring",
-          duration: 0.7,
-          bounce: 0.2,
-        }}
-      >
-        <motion.group
-          initial={false}
-          // animate={isHover ? "hover" : "rest"}
-          dispose={null}
-          // variants={{
-          //   hover: { z: isPress ? -0.9 : 0 },
-          // }}
+      <Bounds fit clip observe margin={10}>
+        <MotionConfig
+          transition={{
+            type: "spring",
+            duration: 0.7,
+            bounce: 0.2,
+          }}
         >
-          <Sphere args={[1, 32, 32]} />
-          <Cylinder args={[5, 5, 10, 128]}>
-            <meshStandardMaterial color={"orange"} />
-          </Cylinder>
-        </motion.group>
-      </MotionConfig>
+          <motion.group
+            initial={false}
+            // animate={isHover ? "hover" : "rest"}
+            dispose={null}
+            // variants={{
+            //   hover: { z: isPress ? -0.9 : 0 },
+            // }}
+          >
+            <Cylinder args={[5, 5, 10, 128]} castShadow>
+              <meshStandardMaterial color={"orange"} />
+            </Cylinder>
+          </motion.group>
+        </MotionConfig>
+      </Bounds>
     </Canvas>
   );
 }
