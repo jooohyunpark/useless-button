@@ -20,7 +20,7 @@ export default function UselessButton() {
 
   useEffect(() => {
     let timeoutID = null;
-    let time = 250 + Math.random() * 750;
+    let time = 250 + Math.random() * 1750;
 
     if (clicked) {
       timeoutID = setTimeout(() => {
@@ -49,7 +49,7 @@ export default function UselessButton() {
         // enableZoom={false}
       />
       <ambientLight intensity={0.3} />
-      {/* <directionalLight position={[-1, 1, 1]} castShadow /> */}
+
       <directionalLight
         castShadow
         position={[-5, 5, 5]}
@@ -65,28 +65,33 @@ export default function UselessButton() {
       <BakeShadows size={25} focus={0} samples={10} />
       <SoftShadows />
 
-      <Bounds fit clip observe margin={10}>
-        <MotionConfig
-          transition={{
-            duration: 0.7,
+      {/* <Bounds fit clip observe margin={10}></Bounds> */}
+
+      <MotionConfig
+        transition={{
+          duration: 0.3,
+        }}
+      >
+        <motion.group
+          animate={clicked ? "clicked" : "initial"}
+          variants={{
+            initial: { y: 0 },
+            clicked: { y: -5 },
+          }}
+          onClick={() => {
+            setClicked(true);
           }}
         >
-          <motion.group
-            animate={clicked ? "clicked" : "initial"}
-            variants={{
-              initial: { y: 0 },
-              clicked: { y: -2.5 },
-            }}
-            onClick={() => {
-              setClicked(true);
-            }}
-          >
-            <Cylinder args={[5, 5, 5, 128]} castShadow>
-              <meshStandardMaterial color={"orange"} />
-            </Cylinder>
-          </motion.group>
-        </MotionConfig>
-      </Bounds>
+          <Cylinder args={[5, 5, 5, 128]} castShadow>
+            <meshStandardMaterial color={"orange"} />
+          </Cylinder>
+        </motion.group>
+      </MotionConfig>
+
+      <mesh scale={10} position={[0, -5 - 2.5, 0]}>
+        <boxGeometry />
+        <meshBasicMaterial color={"white"} />
+      </mesh>
 
       <mesh
         scale={100}
