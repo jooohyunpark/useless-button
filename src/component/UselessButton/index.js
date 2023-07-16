@@ -5,8 +5,8 @@ import {
   OrbitControls,
   OrthographicCamera,
   Bounds,
-  BakeShadows,
   SoftShadows,
+  Stage,
 } from "@react-three/drei";
 import { motion } from "framer-motion-3d";
 import { MotionConfig } from "framer-motion";
@@ -43,7 +43,8 @@ export default function UselessButton() {
       />
       <OrbitControls
         makeDefault
-        maxPolarAngle={Math.PI * 0.5}
+        minPolarAngle={Math.PI / 3}
+        maxPolarAngle={Math.PI / 3}
         enablePan={false}
         target={[0, 0, 0]}
         // enableZoom={false}
@@ -62,11 +63,10 @@ export default function UselessButton() {
         />
       </directionalLight>
       <axesHelper args={[100]} />
-      <BakeShadows size={25} focus={0} samples={10} />
-      <SoftShadows />
 
-      {/* <Bounds fit clip observe margin={10}></Bounds> */}
+      <SoftShadows size={25} focus={0} samples={10} />
 
+      {/* <Bounds fit clip observe margin={10}>    </Bounds> */}
       <MotionConfig
         transition={{
           duration: 0.3,
@@ -76,7 +76,7 @@ export default function UselessButton() {
           animate={clicked ? "clicked" : "initial"}
           variants={{
             initial: { y: 0 },
-            clicked: { y: -5 },
+            clicked: { y: -5.2 },
           }}
           onClick={() => {
             setClicked(true);
@@ -88,7 +88,7 @@ export default function UselessButton() {
         </motion.group>
       </MotionConfig>
 
-      <mesh scale={10} position={[0, -5 - 2.5, 0]}>
+      <mesh scale={10} position={[0, -5 - 2.5 - 0.01, 0]}>
         <boxGeometry />
         <meshBasicMaterial color={"white"} />
       </mesh>
