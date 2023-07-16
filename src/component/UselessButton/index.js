@@ -12,26 +12,26 @@ import { motion } from "framer-motion-3d";
 import { MotionConfig } from "framer-motion";
 
 export default function UselessButton() {
-  const [checked, setChecked] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const handleChange = (event) => {
-    setChecked(event.target.checked);
+    setClicked(event.target.checked);
   };
 
   useEffect(() => {
     let timeoutID = null;
     let time = 250 + Math.random() * 750;
 
-    if (checked) {
+    if (clicked) {
       timeoutID = setTimeout(() => {
-        setChecked(false);
+        setClicked(false);
       }, time);
     }
 
     return () => {
       clearTimeout(timeoutID);
     };
-  }, [checked]);
+  }, [clicked]);
 
   return (
     <Canvas shadows dpr={[1, 2]} resize={{ scroll: false, offsetSize: true }}>
@@ -68,18 +68,18 @@ export default function UselessButton() {
       <Bounds fit clip observe margin={10}>
         <MotionConfig
           transition={{
-            type: "spring",
             duration: 0.7,
-            bounce: 0.2,
           }}
         >
           <motion.group
-            initial={false}
-            // animate={isHover ? "hover" : "rest"}
-            dispose={null}
-            // variants={{
-            //   hover: { z: isPress ? -0.9 : 0 },
-            // }}
+            animate={clicked ? "clicked" : "initial"}
+            variants={{
+              initial: { y: 0 },
+              clicked: { y: -2.5 },
+            }}
+            onClick={() => {
+              setClicked(true);
+            }}
           >
             <Cylinder args={[5, 5, 5, 128]} castShadow>
               <meshStandardMaterial color={"orange"} />
