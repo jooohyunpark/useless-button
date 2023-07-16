@@ -9,14 +9,14 @@ import {
   Stage,
 } from "@react-three/drei";
 import { motion } from "framer-motion-3d";
-import { MotionConfig } from "framer-motion";
+import { MotionConfig, easeOut } from "framer-motion";
 
 export default function UselessButton() {
   const [clicked, setClicked] = useState(false);
 
-  const handleChange = (event) => {
-    setClicked(event.target.checked);
-  };
+  // const handleChange = (event) => {
+  //   setClicked(event.target.checked);
+  // };
 
   useEffect(() => {
     let timeoutID = null;
@@ -34,42 +34,44 @@ export default function UselessButton() {
   }, [clicked]);
 
   return (
-    <Canvas shadows dpr={[1, 2]} resize={{ scroll: false, offsetSize: true }}>
+    <Canvas
+      shadows
+      linear
+      flat
+      dpr={[1, 2]}
+      resize={{ scroll: false, offsetSize: true }}
+    >
       <OrthographicCamera
         makeDefault
         position={[10, 10, 10]}
         near={1}
         far={100}
+        zoom={10}
       />
       <OrbitControls
         makeDefault
+        enableZoom={false}
         minPolarAngle={Math.PI / 3}
         maxPolarAngle={Math.PI / 3}
         enablePan={false}
         target={[0, 0, 0]}
-        // enableZoom={false}
       />
-      <ambientLight intensity={0.3} />
+      {/* <axesHelper args={[100]} /> */}
 
+      <ambientLight intensity={0.5} />
       <directionalLight
         castShadow
         position={[-5, 5, 5]}
         intensity={1.5}
-        shadow-mapSize={1024}
-      >
-        <orthographicCamera
-          attach="shadow-camera"
-          args={[-10, 10, -10, 10, 0.1, 50]}
-        />
-      </directionalLight>
-      <axesHelper args={[100]} />
+        // shadow-mapSize={1024}
+      />
 
-      <SoftShadows size={25} focus={0} samples={10} />
+      {/* <SoftShadows size={25} focus={0} samples={10} /> */}
 
-      {/* <Bounds fit clip observe margin={10}>    </Bounds> */}
       <MotionConfig
         transition={{
-          duration: 0.3,
+          duration: 0.25,
+          ease: easeOut,
         }}
       >
         <motion.group
@@ -88,11 +90,17 @@ export default function UselessButton() {
         </motion.group>
       </MotionConfig>
 
-      <mesh scale={10} position={[0, -5 - 2.5 - 0.01, 0]}>
-        <boxGeometry />
+      {/* blocker ground */}
+      <mesh
+        scale={(100, 100)}
+        position={[0, -2.51, 0]}
+        rotation={[-Math.PI / 2, 0, 0]}
+      >
+        <planeGeometry />
         <meshBasicMaterial color={"white"} />
       </mesh>
 
+      {/* shadow */}
       <mesh
         scale={100}
         rotation={[-Math.PI / 2, 0, 0]}
@@ -100,7 +108,7 @@ export default function UselessButton() {
         receiveShadow
       >
         <planeGeometry />
-        <shadowMaterial transparent opacity={0.35} />
+        <shadowMaterial />
       </mesh>
     </Canvas>
   );
