@@ -49,13 +49,20 @@ export default function UselessButton() {
         // enableZoom={false}
       />
       <ambientLight intensity={0.3} />
+      {/* <directionalLight position={[-1, 1, 1]} castShadow /> */}
       <directionalLight
-        position={[-1, 1, 1]}
-        shadow-mapSize={1024}
         castShadow
-      />
+        position={[-5, 5, 5]}
+        intensity={1.5}
+        shadow-mapSize={1024}
+      >
+        <orthographicCamera
+          attach="shadow-camera"
+          args={[-10, 10, -10, 10, 0.1, 50]}
+        />
+      </directionalLight>
       <axesHelper args={[100]} />
-      <BakeShadows />
+      <BakeShadows size={25} focus={0} samples={10} />
       <SoftShadows />
 
       <Bounds fit clip observe margin={10}>
@@ -74,7 +81,7 @@ export default function UselessButton() {
             //   hover: { z: isPress ? -0.9 : 0 },
             // }}
           >
-            <Cylinder args={[5, 5, 10, 128]} castShadow>
+            <Cylinder args={[5, 5, 5, 128]} castShadow>
               <meshStandardMaterial color={"orange"} />
             </Cylinder>
           </motion.group>
@@ -82,13 +89,13 @@ export default function UselessButton() {
       </Bounds>
 
       <mesh
-        scale={200}
+        scale={100}
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[0, -5, 0]}
+        position={[0, -2.5, 0]}
         receiveShadow
       >
         <planeGeometry />
-        <shadowMaterial transparent opacity={0.3} />
+        <shadowMaterial transparent opacity={0.35} />
       </mesh>
     </Canvas>
   );
