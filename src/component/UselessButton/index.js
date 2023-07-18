@@ -56,12 +56,12 @@ export default function UselessButton() {
         enablePan={false}
         target={[0, 0, 0]}
       />
-      {/* <axesHelper args={[100]} /> */}
+      <axesHelper args={[100]} />
 
       <ambientLight intensity={0.5} />
       <directionalLight
         castShadow
-        position={[-5, 5, 5]}
+        position={[-1, 0.75, 0]}
         intensity={1.5}
         // shadow-mapSize={1024}
       />
