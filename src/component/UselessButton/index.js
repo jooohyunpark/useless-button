@@ -13,11 +13,6 @@ import { MotionConfig, easeOut } from "framer-motion";
 
 export default function UselessButton() {
   const [clicked, setClicked] = useState(false);
-  const [hovered, setHovered] = useState(false);
-
-  // const handleChange = (event) => {
-  //   setClicked(event.target.checked);
-  // };
 
   useEffect(() => {
     let timeoutID = null;
@@ -85,12 +80,6 @@ export default function UselessButton() {
           onClick={() => {
             setClicked(true);
           }}
-          // onPointerOver={() => {
-          //   setHovered(true);
-          // }}
-          // onPointerOut={() => {
-          //   setHovered(false);
-          // }}
         >
           <Cylinder args={[5, 5, 5, 128]} castShadow>
             <meshStandardMaterial color={"orange"} />
