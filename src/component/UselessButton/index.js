@@ -13,6 +13,7 @@ import { MotionConfig, easeOut } from "framer-motion";
 
 export default function UselessButton() {
   const [clicked, setClicked] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   // const handleChange = (event) => {
   //   setClicked(event.target.checked);
@@ -54,9 +55,10 @@ export default function UselessButton() {
         minPolarAngle={Math.PI / 3}
         maxPolarAngle={Math.PI / 3}
         enablePan={false}
+        enableRotate={false}
         target={[0, 0, 0]}
       />
-      <axesHelper args={[100]} />
+      {/* <axesHelper args={[100]} /> */}
 
       <ambientLight intensity={0.5} />
       <directionalLight
@@ -83,6 +85,12 @@ export default function UselessButton() {
           onClick={() => {
             setClicked(true);
           }}
+          // onPointerOver={() => {
+          //   setHovered(true);
+          // }}
+          // onPointerOut={() => {
+          //   setHovered(false);
+          // }}
         >
           <Cylinder args={[5, 5, 5, 128]} castShadow>
             <meshStandardMaterial color={"orange"} />
