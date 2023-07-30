@@ -13,15 +13,20 @@ import { MotionConfig, easeOut } from "framer-motion";
 
 export default function UselessButton() {
   const [clicked, setClicked] = useState(false);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     let timeoutID = null;
-    let time = 250 + Math.random() * 1750;
+
+    const durationLocal = 0.25 + Math.random() * 0.5;
+    const timeout = durationLocal * 1000 + Math.random() * 1750;
+
+    setDuration(durationLocal);
 
     if (clicked) {
       timeoutID = setTimeout(() => {
         setClicked(false);
-      }, time);
+      }, timeout);
     }
 
     return () => {
@@ -46,11 +51,11 @@ export default function UselessButton() {
       />
       <OrbitControls
         makeDefault
+        enablePan={false}
         enableZoom={false}
+        enableRotate={false}
         minPolarAngle={Math.PI / 3}
         maxPolarAngle={Math.PI / 3}
-        enablePan={false}
-        enableRotate={false}
         target={[0, 0, 0]}
       />
       {/* <axesHelper args={[100]} /> */}
@@ -67,7 +72,7 @@ export default function UselessButton() {
 
       <MotionConfig
         transition={{
-          duration: 0.25,
+          duration,
           ease: easeOut,
         }}
       >
@@ -75,7 +80,7 @@ export default function UselessButton() {
           animate={clicked ? "clicked" : "initial"}
           variants={{
             initial: { y: 0 },
-            clicked: { y: -5.2 },
+            clicked: { y: -5 },
           }}
           onClick={() => {
             setClicked(true);
