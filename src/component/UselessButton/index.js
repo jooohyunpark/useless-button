@@ -35,13 +35,7 @@ export default function UselessButton() {
   }, [clicked]);
 
   return (
-    <Canvas
-      shadows
-      linear
-      flat
-      dpr={[1, 2]}
-      resize={{ scroll: false, offsetSize: true }}
-    >
+    <Canvas shadows linear flat resize={{ scroll: false, offsetSize: true }}>
       <OrthographicCamera
         makeDefault
         position={[10, 10, 10]}
