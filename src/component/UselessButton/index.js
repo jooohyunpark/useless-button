@@ -17,7 +17,7 @@ export default function UselessButton() {
     let timeoutID = null;
 
     const durationLocal = 0.25 + Math.random() * 0.5;
-    const timeout = durationLocal * 1000 + Math.random() * 1750;
+    const timeout = durationLocal * 1000 + Math.random() * 2750;
 
     setDuration(durationLocal);
 
