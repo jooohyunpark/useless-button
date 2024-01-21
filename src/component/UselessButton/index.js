@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {
   Cylinder,
   OrbitControls,
   OrthographicCamera,
   Bounds,
-  SoftShadows,
-  Stage,
 } from "@react-three/drei";
 import { motion } from "framer-motion-3d";
 import { MotionConfig, easeOut } from "framer-motion";
@@ -39,7 +37,7 @@ export default function UselessButton() {
       <OrthographicCamera
         makeDefault
         position={[10, 10, 10]}
-        near={1}
+        near={0}
         far={100}
         zoom={10}
       />
@@ -59,10 +57,9 @@ export default function UselessButton() {
         castShadow
         position={[-1, 0.75, 0]}
         intensity={1.5}
-        // shadow-mapSize={1024}
+        color={"white"}
+        shadow-mapSize={512}
       />
-
-      {/* <SoftShadows size={25} focus={0} samples={10} /> */}
 
       <MotionConfig
         transition={{
@@ -81,7 +78,7 @@ export default function UselessButton() {
           }}
         >
           <Cylinder args={[5, 5, 5, 128]} castShadow>
-            <meshStandardMaterial color={"orange"} />
+            <meshStandardMaterial color={"#ff5b00"} />
           </Cylinder>
         </motion.group>
       </MotionConfig>
