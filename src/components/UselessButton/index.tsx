@@ -7,6 +7,7 @@ import { animated, useSpring } from "@react-spring/three";
 
 function Scene() {
   const [clicked, setClicked] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const [duration, setDuration] = useState(250);
 
   useEffect(() => {
@@ -28,7 +29,12 @@ function Scene() {
 
   const springs = useSpring({
     y: clicked ? -5 : 0,
-    config: { duration, easing: (t: number) => 1 - Math.pow(1 - t, 3) },
+    config: { duration },
+  });
+
+  const { color } = useSpring({
+    color: hovered ? "red" : "#ff4500",
+    config: { duration: 150 },
   });
 
   const handleClick = useCallback(() => {
@@ -54,19 +60,24 @@ function Scene() {
         target={[0, 0, 0]}
       />
 
-      <ambientLight intensity={1} />
+      <ambientLight intensity={1} color="white" />
       <directionalLight
         castShadow
         position={[-1, 0.75, 0]}
-        intensity={3}
+        intensity={5}
         color="white"
         shadow-mapSize={512}
       />
 
       <animated.group position-y={springs.y} onClick={handleClick}>
-        <Cylinder args={[5, 5, 5, 128]} castShadow>
-          <meshStandardMaterial
-            color="#FF4500"
+        <Cylinder
+          args={[5, 5, 5, 128]}
+          castShadow
+          onPointerEnter={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
+        >
+          <animated.meshStandardMaterial
+            color={color}
             roughness={0.8}
             metalness={0.2}
           />
@@ -91,7 +102,7 @@ function Scene() {
         receiveShadow
       >
         <planeGeometry />
-        <shadowMaterial />
+        <animated.shadowMaterial color="black" />
       </mesh>
     </>
   );
