@@ -66,7 +66,7 @@ function Scene() {
       <animated.group position-y={springs.y} onClick={handleClick}>
         <Cylinder args={[5, 5, 5, 128]} castShadow>
           <meshStandardMaterial
-            color="#ff5b00"
+            color="#FF4500"
             roughness={0.8}
             metalness={0.2}
           />
