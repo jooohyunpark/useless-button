@@ -32,8 +32,8 @@ function Scene() {
     config: { duration },
   });
 
-  const { color } = useSpring({
-    color: hovered ? "red" : "#ff4500",
+  const { emmisiveIntensity } = useSpring({
+    emmisiveIntensity: hovered ? 1 : 0,
     config: { duration: 150 },
   });
 
@@ -60,7 +60,7 @@ function Scene() {
         target={[0, 0, 0]}
       />
 
-      <ambientLight intensity={1} color="white" />
+      <ambientLight intensity={2} color="white" />
       <directionalLight
         castShadow
         position={[-1, 0.75, 0]}
@@ -77,9 +77,11 @@ function Scene() {
           onPointerOut={() => setHovered(false)}
         >
           <animated.meshStandardMaterial
-            color={color}
+            color="#ff4500"
             roughness={0.8}
             metalness={0.2}
+            emissive="#ff4500"
+            emissiveIntensity={emmisiveIntensity}
           />
         </Cylinder>
       </animated.group>
