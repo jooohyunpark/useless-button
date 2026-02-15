@@ -3,28 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
-    "export": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@mui/material": "^5.11.15",
-    "@react-three/drei": "^9.78.2",
-    "@react-three/fiber": "^8.13.5",
-    "eslint": "8.37.0",
-    "eslint-config-next": "13.2.4",
-    "framer-motion": "^10.12.21",
-    "framer-motion-3d": "^10.12.21",
-    "next": "15.5.10",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "three": "^0.154.0"
+    "@react-spring/three": "^10.0.1",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.1.2",
+    "next": "^16.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "^0.172.0"
   },
   "devDependencies": {
-    "sass": "^1.60.0"
+    "@next/eslint-plugin-next": "^16.0.0",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.172.0",
+    "eslint": "^9.25.0",
+    "typescript": "^5.8.0"
   }
 }
