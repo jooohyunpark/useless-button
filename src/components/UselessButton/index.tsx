@@ -44,7 +44,6 @@ function Scene() {
         far={100}
         zoom={10}
       />
-
       <OrbitControls
         makeDefault
         enablePan={false}
@@ -56,7 +55,6 @@ function Scene() {
       />
 
       <ambientLight intensity={1} />
-
       <directionalLight
         castShadow
         position={[-1, 0.75, 0]}
@@ -67,7 +65,11 @@ function Scene() {
 
       <animated.group position-y={springs.y} onClick={handleClick}>
         <Cylinder args={[5, 5, 5, 128]} castShadow>
-          <meshStandardMaterial color="blue" metalness={0.2} roughness={0.8} />
+          <meshStandardMaterial
+            color="#ff5b00"
+            roughness={0.8}
+            metalness={0.2}
+          />
         </Cylinder>
       </animated.group>
 
