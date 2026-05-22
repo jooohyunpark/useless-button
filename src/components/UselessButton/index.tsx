@@ -3,20 +3,16 @@
 import { useEffect, useState, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Cylinder, OrbitControls, OrthographicCamera } from "@react-three/drei";
-import { animated, useSpring } from "@react-spring/three";
+import { animated, useSpring, easings } from "@react-spring/three";
 
 function Scene() {
   const [clicked, setClicked] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [duration, setDuration] = useState(250);
 
   useEffect(() => {
     if (!clicked) return;
 
-    const durationLocal = 250 + Math.random() * 500;
-    const timeout = durationLocal + Math.random() * 2750;
-
-    setDuration(durationLocal);
+    const timeout = 500 + Math.random() * 2750;
 
     const timeoutID = setTimeout(() => {
       setClicked(false);
@@ -29,12 +25,17 @@ function Scene() {
 
   const springs = useSpring({
     y: clicked ? -5 : 0,
-    config: { duration },
+    config: {
+      mass: 1,
+      tension: 300,
+      friction: 40,
+      precision: 0.0001,
+    },
   });
 
   const { color } = useSpring({
     color: hovered ? "cyan" : "blue",
-    config: { duration: 150 },
+    config: { duration: 200, easing: easings.easeOutCubic },
   });
 
   const handleClick = useCallback(() => {
