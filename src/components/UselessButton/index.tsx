@@ -34,7 +34,7 @@ function Scene() {
   });
 
   const { color } = useSpring({
-    color: hovered ? "cyan" : "blue",
+    color: hovered ? "red" : "coral",
     config: { duration: 200, easing: easings.easeOutCubic },
   });
 
